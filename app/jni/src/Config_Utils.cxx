@@ -168,8 +168,8 @@ NVConf::configuration NVConf::ReadConfig()
         in_cfg.key_range_end = *key_range->get_as<int>("KeyRangeEnd");
     } else {
         in_cfg.use_custom_key_range = false;
-        in_cfg.key_range_start = 0;
-        in_cfg.key_range_end = 127;
+        in_cfg.key_range_start = 21;
+        in_cfg.key_range_end = 108;
     }
     
     auto logging = cfg->get_table("Logging");
