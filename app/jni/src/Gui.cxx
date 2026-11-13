@@ -754,99 +754,59 @@ void NVGui::Run(SDL_Renderer *r)
 
                             // Initialize from config if available
                             if (live_conf.custom_note_colors.size() >= 7) {
-                                for (int i = 0; i < 7; ++i) {
-                                    int color = live_conf.custom_note_colors[i];
-                                    piano_colors[i][0] = ((color >> 16) & 0xFF) / 255.0f;
-                                    piano_colors[i][1] = ((color >> 8) & 0xFF) / 255.0f;
-                                    piano_colors[i][2] = (color & 0xFF) / 255.0f;
-                                }
+                        if (live_conf.use_custom_note_colors) {
+                            ImGui::Text("Custom Track / Note Colors (Supports Pure Black & White):");
+
+                            // Ensure at least 16 color slots exist
+                            if (live_conf.custom_note_colors.size() < 16) {
+                                live_conf.custom_note_colors.resize(16, 0xFFFFFF);
                             }
 
-                            for (int i = 0; i < 7; ++i) {
-                                ImGui::ColorEdit3((std::string(key_names[i]) + " Key Color").c_str(), piano_colors[i]);
-                                ImGui::SameLine();
-                                if (ImGui::Button((std::string("Apply ") + key_names[i]).c_str())) {
-                                    int color = ((int)(piano_colors[i][0]*255.0f) << 16) |
-                                               ((int)(piano_colors[i][1]*255.0f) << 8) |
-                                               (int)(piano_colors[i][2]*255.0f);
-                                    if (live_conf.custom_note_colors.size() <= (size_t)i) {
-                                        live_conf.custom_note_colors.resize(i + 1);
-                                    }
-                                    live_conf.custom_note_colors[i] = color;
+                            // Quick Presets including Black & White
+                            if (ImGui::Button("All White")) {
+                                std::fill(live_conf.custom_note_colors.begin(), live_conf.custom_note_colors.end(), 0xFFFFFF);
+                                NVConf::WriteConfig(live_conf);
+                            }
+                            ImGui::SameLine();
+                            if (ImGui::Button("All Black")) {
+                                std::fill(live_conf.custom_note_colors.begin(), live_conf.custom_note_colors.end(), 0x000000);
+                                NVConf::WriteConfig(live_conf);
+                            }
+                            ImGui::SameLine();
+                            if (ImGui::Button("Alternating B&W")) {
+                                for (size_t i = 0; i < live_conf.custom_note_colors.size(); ++i) {
+                                    live_conf.custom_note_colors[i] = (i % 2 == 0) ? 0xFFFFFF : 0x000000;
+                                }
+                                NVConf::WriteConfig(live_conf);
+                            }
+                            ImGui::SameLine();
+                            if (ImGui::Button("+ Add Track")) {
+                                live_conf.custom_note_colors.push_back(0xFFFFFF);
+                                NVConf::WriteConfig(live_conf);
+                            }
+
+                            ImGui::Separator();
+
+                            // Color picker for every track/slot
+                            for (size_t i = 0; i < live_conf.custom_note_colors.size(); ++i) {
+                                int hexCol = live_conf.custom_note_colors[i];
+                                float rgb[3] = {
+                                    ((hexCol >> 16) & 0xFF) / 255.0f,
+                                    ((hexCol >> 8) & 0xFF) / 255.0f,
+                                    (hexCol & 0xFF) / 255.0f
+                                };
+
+                                std::string label = "Track / Slot " + std::to_string(i + 1);
+                                if (ImGui::ColorEdit3(label.c_str(), rgb)) {
+                                    int r = static_cast<int>(rgb[0] * 255.0f + 0.5f);
+                                    int g = static_cast<int>(rgb[1] * 255.0f + 0.5f);
+                                    int b = static_cast<int>(rgb[2] * 255.0f + 0.5f);
+                                    live_conf.custom_note_colors[i] = (r << 16) | (g << 8) | b;
                                     NVConf::WriteConfig(live_conf);
                                 }
                             }
-
-                            ImGui::Separator();
-                            ImGui::Text("Quick Color Presets:");
-                            if (ImGui::Button("Rainbow Colors")) {
-                                int rainbow_colors[7] = {
-                                    0xFF0000,   // Red
-                                    0xFF8000,   // Orange
-                                    0xFFFF00,   // Yellow
-                                    0x00FF00,   // Green
-                                    0x0000FF,   // Blue
-                                    0x8000FF,   // Indigo
-                                    0xFF00FF    // Violet
-                                };
-                                live_conf.custom_note_colors.assign(rainbow_colors, rainbow_colors + 7);
-                                NVConf::WriteConfig(live_conf);
-                            }
-                            ImGui::SameLine();
-                            if (ImGui::Button("Pastel Colors")) {
-                                int pastel_colors[7] = {
-                                    0xFFB3BA,   // Pastel Red
-                                    0xFFDFBA,   // Pastel Orange
-                                    0xFFFFBA,   // Pastel Yellow
-                                    0xBAFFBA,   // Pastel Green
-                                    0xBAE1FF,   // Pastel Blue
-                                    0xD7BAFF,   // Pastel Indigo
-                                    0xFFB3F0    // Pastel Violet
-                                };
-                                live_conf.custom_note_colors.assign(pastel_colors, pastel_colors + 7);
-                                NVConf::WriteConfig(live_conf);
-                            }
-                            ImGui::SameLine();
-                            if (ImGui::Button("Monochrome")) {
-                                int mono_colors[7] = {
-                                    0xFFFFFF, 0xF0F0F0, 0xE0E0E0, 0xD0D0D0,
-                                    0xC0C0C0, 0xB0B0B0, 0xA0A0A0
-                                };
-                                live_conf.custom_note_colors.assign(mono_colors, mono_colors + 7);
-                                NVConf::WriteConfig(live_conf);
-                            }
-
-                            if (ImGui::Button("Clear All Piano Colors")) {
-                                live_conf.custom_note_colors.clear();
-                                NVConf::WriteConfig(live_conf);
-                            }
-
-                            ImGui::Separator();
-                            static bool show_save_message = false;
-                            static float save_message_timer = 0.0f;
-
-                            if (ImGui::Button("Save Colors")) {
-                                // Save the currently selected piano key colors
-                                // This ensures the colors are persisted even if user doesn't use individual "Apply" buttons
-                                for (int i = 0; i < 7; ++i) {
-                                    int color = ((int)(piano_colors[i][0]*255.0f) << 16) |
-                                               ((int)(piano_colors[i][1]*255.0f) << 8) |
-                                               (int)(piano_colors[i][2]*255.0f);
-                                    if (live_conf.custom_note_colors.size() <= (size_t)i) {
-                                        live_conf.custom_note_colors.resize(i + 1);
-                                    }
-                                    live_conf.custom_note_colors[i] = color;
-                                }
-                                NVConf::WriteConfig(live_conf);
-                                show_save_message = true;
-                                save_message_timer = 2.0f; // Show message for 2 seconds
-                            }
-                            if (ImGui::BeginItemTooltip())
-                            {
-                                ImGui::Text("Save the currently selected piano key colors to config");
-                                ImGui::EndTooltip();
-                            }
-
+						}
+								
                             // Show save confirmation message with timer
                             if (show_save_message) {
                                 ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "Colors saved successfully!");
