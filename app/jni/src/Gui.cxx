@@ -888,8 +888,23 @@ void NVGui::Run(SDL_Renderer *r)
                             }
                         }
                         
-                        ImGui::Text("\n");
+                                                ImGui::Text("\n");
                         ImGui::Text("Custom Key Range");
+
+                        if (ImGui::RadioButton("88 Keys (A0 - C8)", live_conf.use_custom_key_range && live_conf.key_range_start == 21 && live_conf.key_range_end == 108)) {
+                            live_conf.use_custom_key_range = true;
+                            live_conf.key_range_start = 21;
+                            live_conf.key_range_end = 108;
+                            NVConf::WriteConfig(live_conf);
+                        }
+                        ImGui::SameLine();
+                        if (ImGui::RadioButton("128 Keys (Full MIDI)", !live_conf.use_custom_key_range || (live_conf.key_range_start == 0 && live_conf.key_range_end == 127))) {
+                            live_conf.use_custom_key_range = false;
+                            live_conf.key_range_start = 0;
+                            live_conf.key_range_end = 127;
+                            NVConf::WriteConfig(live_conf);
+                        }
+
                         ImGui::Checkbox("Use Custom Key Range", &live_conf.use_custom_key_range);
                         if (ImGui::BeginItemTooltip())
                         {
@@ -903,12 +918,7 @@ void NVGui::Run(SDL_Renderer *r)
                             
                             if (live_conf.key_range_start > live_conf.key_range_end) {
                                 live_conf.key_range_end = live_conf.key_range_start;
-                            }
-                            
-                            ImGui::Text("Range: %d - %d (%d notes)", 
-                                live_conf.key_range_start, 
-                                live_conf.key_range_end, 
-                                live_conf.key_range_end - live_conf.key_range_start + 1);
+							}
                         }
                         
                         ImGui::Text("\n");
