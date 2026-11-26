@@ -6,9 +6,6 @@
 #include "Config_Utils.hxx"
 #include "Nlist.hxx"
 
-using NVi::current_file_info;
-using NVi::current_midi_file;
-
 
 // Add these declarations for the playback control
 extern bool is_paused;
