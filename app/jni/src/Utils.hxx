@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 #include <cstddef>
 //#include <iostream>
 
@@ -52,7 +54,7 @@ namespace  NVi   /* ===== Tool function namespace ===== */
     void RefreshSFList();
     void UpdateFileInfo(const std::string& file_path);
     void RequestMidiChange(const std::string& path);
-    void RequestSoundfontChange(const std::string&
+    void RequestSoundfontChange(const std::string& path);
     //void RefreshMIDIList();
     
     // Float rgb to int rgb
