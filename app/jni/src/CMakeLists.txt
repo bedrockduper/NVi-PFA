@@ -81,13 +81,13 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -Wall")
 file(GLOB_RECURSE APP_CXX_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
 
 add_library(main SHARED
-    extern/imgui_sdl3/imgui_impl_sdl3.cpp
-    extern/imgui_sdl3/imgui_impl_sdlrenderer3.cpp
-    extern/imgui/imgui.cpp
-    extern/imgui/imgui_demo.cpp
-    extern/imgui/imgui_tables.cpp
-    extern/imgui/imgui_widgets.cpp
-    extern/imgui/imgui_draw.cpp
+    src/extern/imgui_sdl3/imgui_impl_sdl3.cpp
+    src/extern/imgui_sdl3/imgui_impl_sdlrenderer3.cpp
+    src/extern/imgui/imgui.cpp
+    src/extern/imgui/imgui_demo.cpp
+    src/extern/imgui/imgui_tables.cpp
+    src/extern/imgui/imgui_widgets.cpp
+    src/extern/imgui/imgui_draw.cpp
     src/Config_Utils.cxx
     src/Json_Config.cxx
     src/MIDI.cxx
