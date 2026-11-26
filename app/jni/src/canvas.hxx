@@ -51,12 +51,13 @@ public:
     unsigned int getNoteHitsCount() const { return note_hits_count; }
     unsigned int GetNoteCount();
 
+    int BkeyW, BkeyH, WkeyW, WkeyH;
+
 private:
 
     SDL_Texture *Bk0, *Bk1, *Wk, *note, *background_texture;
     SDL_Surface *colors;
 
-    int BkeyW, BkeyH, WkeyW, WkeyH;
     int TW, TX[11], KeyX[128];
     
     // Performance monitoring
