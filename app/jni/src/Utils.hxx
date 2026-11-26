@@ -23,8 +23,7 @@ inline std::string current_midi_file;
 inline bool main_gui_window = false;
 static Canvas     *Win;
 //static NVnoteList MIDI;
-
-
+struct NVmidiFileInfo;
 
 namespace  NVi   /* ===== Tool function namespace ===== */
 {
@@ -52,7 +51,7 @@ namespace  NVi   /* ===== Tool function namespace ===== */
     void CreateMidiList();
     void ReadMidiList();
     void RefreshSFList();
-    extern struct NVmidiFileInfo* current_file_info;
+    extern struct ::NVmidiFileInfo* current_file_info;
 extern std::string current_midi_file;
     void UpdateFileInfo(const std::string& file_path);
     void LogToFile(const char* tag, const char* fmt, ...);
