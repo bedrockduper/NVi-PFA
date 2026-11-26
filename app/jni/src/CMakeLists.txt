@@ -78,6 +78,8 @@ else()
 
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -Wall")
+file(GLOB_RECURSE APP_CXX_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+
 add_library(main SHARED
     extern/imgui_sdl3/imgui_impl_sdl3.cpp
     extern/imgui_sdl3/imgui_impl_sdlrenderer3.cpp
@@ -86,14 +88,7 @@ add_library(main SHARED
     extern/imgui/imgui_tables.cpp
     extern/imgui/imgui_widgets.cpp
     extern/imgui/imgui_draw.cpp
-    Config_Utils.cxx
-    MIDI.cxx
-    Nlist.cxx
-    Player.cxx
-    Sequ.cxx
-    Utils.cxx
-    canvas.cxx
-    Gui.cxx
+    ${APP_CXX_SOURCES}
 )
 target_link_libraries(main PRIVATE SDL3::SDL3 bass bassmidi log)
 
