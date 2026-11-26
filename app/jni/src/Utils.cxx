@@ -113,6 +113,10 @@ void NVi::revU32(u32_t &x)
     x = x >> 24 | (x & 0xFF0000) >> 8 | (x & 0xFF00) << 8 | x << 24;
 }
 
+::NVmidiFileInfo* NVi::current_file_info = nullptr;
+std::string NVi::current_midi_file = "";
+
+
 void NVi::UpdateFileInfo(const std::string& file_path)
 {
     if (!current_file_info) {
