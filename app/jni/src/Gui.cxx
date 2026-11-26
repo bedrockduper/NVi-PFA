@@ -362,26 +362,6 @@ void NVGui::Run(SDL_Renderer *r)
         ImGui::End();
     }
 
-    // Show save confirmation message
-	static bool show_load_message = false;
-    if (show_save_message) {
-        ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "Config saved successfully!");
-        save_message_timer -= ImGui::GetIO().DeltaTime;
-        if (save_message_timer <= 0.0f) {
-            show_save_message = false;
-        }
-    }
-
-    // Show load confirmation message
-    static bool show_load_message = false;
-    static float load_message_timer = 0.0f;
-    if (show_load_message) {
-        ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "Config loaded successfully!");
-        load_message_timer -= ImGui::GetIO().DeltaTime;
-        if (load_message_timer <= 0.0f) {
-            show_load_message = false;
-        }
-    }
 #ifndef NON_ANDROID
     io.FontGlobalScale = live_conf.gui_scale > 0.0f ? live_conf.gui_scale * 0.95f : 0.95f;
 #else
