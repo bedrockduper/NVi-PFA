@@ -65,7 +65,6 @@ add_executable(nvi-pfa
     extern/imgui/imgui_widgets.cpp
     extern/imgui/imgui_draw.cpp
     Config_Utils.cxx
-    file_utils.cxx
     MIDI.cxx
     Nlist.cxx
     Player.cxx
@@ -88,7 +87,6 @@ add_library(main SHARED
     extern/imgui/imgui_widgets.cpp
     extern/imgui/imgui_draw.cpp
     Config_Utils.cxx
-    file_utils.cxx
     MIDI.cxx
     Nlist.cxx
     Player.cxx
