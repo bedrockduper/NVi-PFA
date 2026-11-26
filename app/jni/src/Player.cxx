@@ -151,6 +151,7 @@ static void DrawNote(NVi::u16_t k, const NVnote &n, int pps)
 {
     unsigned int c = Col[(n.track%16+n.chn)%16];
     int key = KeyMap[k], y_1;
+	int keyTop = _WinH - Win->WkeyH;
     int y_0 = floor(_WinH - (n.Tstart - Tplay) * pps+0.5f);
 
     if (y_0 < 0)
