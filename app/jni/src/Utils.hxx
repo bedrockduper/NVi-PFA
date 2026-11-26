@@ -50,6 +50,7 @@ namespace  NVi   /* ===== Tool function namespace ===== */
     void CreateMidiList();
     void ReadMidiList();
     void ReloadMidiList();
+    void ReloadSoundfontList();
     bool CheckGMSoundfontExists();
     void LoadDefaultGMSoundfont();
     void ReloadAllResources();
