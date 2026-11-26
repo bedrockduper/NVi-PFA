@@ -50,6 +50,7 @@ namespace  NVi   /* ===== Tool function namespace ===== */
     void CreateMidiList();
     void ReadMidiList();
     void ReloadMidiList();
+    bool CheckGMSoundfontExists();
     void ReloadAllResources();
     void RefreshSFList();
     extern struct ::NVmidiFileInfo* current_file_info;
