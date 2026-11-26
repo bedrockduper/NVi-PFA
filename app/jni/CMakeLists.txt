@@ -92,6 +92,7 @@ add_library(main SHARED
     src/extern/imgui/imgui_draw.cpp
     src/Config_Utils.cxx
     src/Json_Config.cxx
+    src/file_utils.cxx
     src/MIDI.cxx
     src/Nlist.cxx
     src/Player.cxx
