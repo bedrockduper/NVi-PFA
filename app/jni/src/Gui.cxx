@@ -363,7 +363,7 @@ void NVGui::Run(SDL_Renderer *r)
     }
 
     // Show save confirmation message
-    static bool show_save_message = false;
+	static bool show_load_message = false;
     if (show_save_message) {
         ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "Config saved successfully!");
         save_message_timer -= ImGui::GetIO().DeltaTime;
