@@ -49,7 +49,7 @@ namespace  NVi   /* ===== Tool function namespace ===== */
     void CheckAssets();
     void CreateMidiList();
     void ReadMidiList();
-    voic ReloadMidiList();
+    void ReloadMidiList();
     void RefreshSFList();
     extern struct ::NVmidiFileInfo* current_file_info;
 extern std::string current_midi_file;
