@@ -4,18 +4,7 @@
 
 #include "Utils.hxx"
 
-enum class NV_METYPE  /* === MIDI Event types === */
-{
-    NOFF = (NVi::nv_byte)0x80, // Noteoff
-    NOON = (NVi::nv_byte)0x90, // Noteon
-    NOAT = (NVi::nv_byte)0xA0, // Polifonic Key Pressure
-    CTRO = (NVi::nv_byte)0xB0, // ControlChange
-    PROG = (NVi::nv_byte)0xC0, // ProgramChange
-    CHAT = (NVi::nv_byte)0xD0, // Channel
-    PITH = (NVi::nv_byte)0xE0, // Pitchbend
-    SYSC = (NVi::nv_byte)0xF0, // System Exclusive
-    META = (NVi::nv_byte)0xFF, // Meta-Event
-};
+#include "MIDI.cxx"
 
 struct NVmidiFile   /* ===== MIDI file type ===== */
 {
