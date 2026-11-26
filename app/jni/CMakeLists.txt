@@ -101,7 +101,6 @@ add_library(main SHARED
     src/Gui.cxx
 )
 
-)
 target_link_libraries(main PRIVATE SDL3::SDL3 bass bassmidi log)
 
 endif()
