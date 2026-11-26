@@ -52,6 +52,8 @@ namespace  NVi   /* ===== Tool function namespace ===== */
     void CreateMidiList();
     void ReadMidiList();
     void RefreshSFList();
+    extern struct NVmidiFileInfo* current_file_info;
+extern std::string current_midi_file;
     void UpdateFileInfo(const std::string& file_path);
     void RequestMidiChange(const std::string& path);
     void RequestSoundfontChange(const std::string& path);
