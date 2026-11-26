@@ -68,10 +68,7 @@ private:
     int note_hits_count;
     bool NoteCounted[128];
     unsigned int GetNoteCount();
-    bool isNoteCounted(int key) const { return NoteCounted[key]; }
-    void setNoteCounted(int key, bool counted) { NoteCounted[key] = counted; }
-    void incrementNoteCount() { note_hits_count++; }
-
+    
     int scale(int x) const;
 
     RGBA_pix getColor(color C) const;
