@@ -49,6 +49,7 @@ public:
     void setNoteCounted(int key, bool value) { NoteCounted[key] = value; }
     void incrementNoteCount() { note_hits_count++; }
     unsigned int getNoteHitsCount() const { return note_hits_count; }
+    unsigned int GetNoteCount();
 
 private:
 
@@ -67,7 +68,6 @@ private:
     // Note counter: total notes hit since app start
     int note_hits_count;
     bool NoteCounted[128];
-    unsigned int GetNoteCount();
     
     int scale(int x) const;
 
