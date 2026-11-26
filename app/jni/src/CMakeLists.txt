@@ -88,7 +88,17 @@ add_library(main SHARED
     extern/imgui/imgui_tables.cpp
     extern/imgui/imgui_widgets.cpp
     extern/imgui/imgui_draw.cpp
-    ${APP_CXX_SOURCES}
+    src/Config_Utils.cxx
+    src/Json_Config.cxx
+    src/MIDI.cxx
+    src/Nlist.cxx
+    src/Player.cxx
+    src/Sequ.cxx
+    src/Utils.cxx
+    src/canvas.cxx
+    src/Gui.cxx
+)
+
 )
 target_link_libraries(main PRIVATE SDL3::SDL3 bass bassmidi log)
 
