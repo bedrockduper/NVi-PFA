@@ -86,7 +86,3 @@ extern std::string current_midi_file;
 
     void revU32(u32_t &x); // Reversing the end-order of a 32-bit integer variable
 };
-
-using NVi::current_file_info;
-using NVi::current_midi_file;
-
