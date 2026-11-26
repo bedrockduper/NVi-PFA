@@ -16,7 +16,8 @@
 #include "extern/imgui_sdl3/imgui_impl_sdl3.h"
 #include "extern/imgui_sdl3/imgui_impl_sdlrenderer3.h"
 
-
+using NVi::current_file_info;
+using NVi::current_midi_file;
 
 
 
