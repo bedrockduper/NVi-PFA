@@ -101,6 +101,12 @@ add_library(main SHARED
     src/Gui.cxx
 )
 
+target_include_directories(main PRIVATE
+    src
+    src/extern/imgui
+    src/extern/imgui_sdl3
+)
+
 target_link_libraries(main PRIVATE SDL3::SDL3 bass bassmidi log)
 
 endif()
